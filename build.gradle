@@ -1,0 +1,53 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+  }
+}
+
+apply plugin: "eclipse"
+
+allprojects {
+  apply plugin: "java"
+  apply plugin: "groovy"
+  apply plugin: "spring-boot"
+  
+  sourceCompatibility = 1.8
+  version = "0.0.1-SNAPSHOT"
+
+  repositories {
+    mavenCentral()
+    jcenter()
+    // Repo for Spring milestone and snapshot builds
+    maven { url "http://repo.spring.io/libs-snapshot" }
+    // Repo for GraphAware's transitive dependencies
+    maven { url "http://repo.eaio.com/maven2" }
+  }
+
+  dependencies {
+    compile "org.springframework.boot:spring-boot-starter"
+    compile "org.springframework.data:spring-data-neo4j:$springDataNeo4jVersion"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.springframework:spring-test:$springTest"
+
+    // Commons Utils
+    compile "org.apache.commons:commons-lang3:$apacheCommonsLangVersion"
+
+    // Spock
+    testCompile "org.codehaus.groovy:groovy-all:$groovyAllVersion"
+    testCompile "org.spockframework:spock-core:$spockVersion"
+    testCompile "org.spockframework:spock-spring:$spockVersion"
+
+    // Neo4j test dependencies
+    testCompile "org.springframework.data:spring-data-neo4j:$springDataNeo4jVersion:tests@jar"
+    testCompile "org.neo4j.test:neo4j-harness:$neo4jVersion"
+    compile "org.neo4j:neo4j-ogm:$neo4jOgmVersion:tests@jar"
+    testCompile "com.graphaware.neo4j:tests:$graphAwareTestsVersion"
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "2.4"
+}

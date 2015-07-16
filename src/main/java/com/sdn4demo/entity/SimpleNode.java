@@ -8,7 +8,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class SimpleNode {
+public class SimpleNode implements Node {
 
   @GraphId
   private Long id;

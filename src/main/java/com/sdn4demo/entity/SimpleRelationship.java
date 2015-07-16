@@ -15,7 +15,7 @@ public class SimpleRelationship {
   private SimpleNode parent;
 
   @EndNode
-  private SimpleNode child;
+  private Node child;
 
   public SimpleRelationship() { }
 
@@ -49,11 +49,11 @@ public class SimpleRelationship {
     this.parent = parent;
   }
 
-  public SimpleNode getChild() {
+  public Node getChild() {
     return child;
   }
 
-  public void setChild(SimpleNode child) {
+  public void setChild(Node child) {
     this.child = child;
   }
 
